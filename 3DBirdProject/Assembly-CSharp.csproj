@@ -64,10 +64,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\3D胖鸟\scripts\GameMager.cs" />
+    <Compile Include="Assets\3D胖鸟\scripts\InterfaceTest.cs" />
     <Compile Include="Assets\3D胖鸟\scripts\bird.cs" />
     <Compile Include="Assets\3D胖鸟\scripts\obstacle.cs" />
+    <Compile Include="Assets\3D胖鸟\scripts\test.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/unity3d/3DBird/3DBirdProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>D:/unity3d/3DBird/3DBirdProject/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>D:/unity3d/3DBird/3DBirdProject/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
@@ -87,17 +92,14 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/unity3d/3DBird/3DBirdProject/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>D:/unity3d/3DBird/3DBirdProject/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/unity3d/3DBird/3DBirdProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/unity3d/3DBird/3DBirdProject/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>D:/unity3d/3DBird/3DBirdProject/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>D:/unity3d/3DBird/3DBirdProject/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/unity3d/install/2019.3.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

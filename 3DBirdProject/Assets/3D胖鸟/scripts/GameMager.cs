@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
+
 
 public class GameMager : MonoBehaviour
 {
@@ -27,48 +27,47 @@ public class GameMager : MonoBehaviour
     {
         RangeCreat();
         creatTime -= Time.deltaTime;
+        
 
     }
 
     public void Creat(Transform position)
     {
-        
-        
-        if (creatTime <= 0)
-        {
-            Instantiate((creatGameObject),position);
-            creatTime = timeTemp;
 
-        }
-       
+
+        Instantiate((creatGameObject), position);
+
 
     }
 
     public void RangeCreat()
     {
-        Random random;
-        random=new Random();
-        float cTemp;
-        cTemp = random.Next(1,4);//达不到最大值
-        Debug.Log(cTemp);
-        if (cTemp==1)
+        if (creatTime <= 0)
         {
-            Creat(onePosition);
+            float cTemp = Random.Range(1, 4);//达不到最大值
 
+            Debug.Log(cTemp);
+            if (cTemp == 1)
+            {
+                Creat(onePosition);
+
+
+            }
+            else if (cTemp == 2)
+            {
+                Creat(twoPosition);
+
+
+            }
+            else if (cTemp == 3)
+            {
+                Creat(threePosition);
+
+
+            }
+            creatTime = timeTemp;
 
         }
-        else if (cTemp==2)
-        {
-            Creat(twoPosition);
-
-
-        }
-        else if(cTemp==3)
-        {
-            Creat(threePosition);
-
-
-        }
-
     }
+
 }
