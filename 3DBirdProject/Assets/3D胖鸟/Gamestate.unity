@@ -247,7 +247,7 @@ MonoBehaviour:
   threePosition: {fileID: 464752126}
   creatGameObject: {fileID: 6871694646371439935, guid: 641aa69ff70c1a34f9ee426d42d48960,
     type: 3}
-  creatTime: 1
+  creatTime: 0.3
 --- !u!4 &292902888
 Transform:
   m_ObjectHideFlags: 0
