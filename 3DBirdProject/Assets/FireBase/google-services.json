@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "719657211575",
+    "firebase_url": "https://fir-test-69942.firebaseio.com",
+    "project_id": "fir-test-69942",
+    "storage_bucket": "fir-test-69942.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719657211575:android:b091962721061eb6db9f32",
+        "android_client_info": {
+          "package_name": "com.euphoriaer.ThreeBird"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719657211575-3dsqp6skb4kous0k53t8p5ao11li7pmn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC33NoJFzm5F--fBjFJE-iWRJF1-wXQWXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719657211575-3dsqp6skb4kous0k53t8p5ao11li7pmn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
