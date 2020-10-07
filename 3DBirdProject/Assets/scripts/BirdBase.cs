@@ -15,10 +15,10 @@ public class BirdBase : MonoBehaviour
 
     public Button left;
 
-    public bool jumpKeyB = false;
-    public bool rightKeyB = false;
-    public bool leftKeyB = false;
-    public bool fastFlyB = false;
+    public bool jumpKeyBool = false;
+    public bool rightKeyBool = false;
+    public bool leftKeyBool = false;
+    public bool fastFlyBool = false;
 
     public Collider lost;
 
@@ -26,42 +26,13 @@ public class BirdBase : MonoBehaviour
     private GameMager GameMager;
     private Animator Animator;
 
-    private void GetKey()
-    {
-        //if (Input.GetKeyDown(jumpKey))
-        //{
-        //    jumpKeyB = true;
-        //}
-        //else
-        //{
-        //    jumpKeyB = false;
-        //}
-        //if (Input.GetKey(leftKey))
-        //{
-        //    leftKeyB = true;
-        //}
-        //else
-        //{
-        //    leftKeyB = false;
-        //}
-        //if (Input.GetKey(rightKey))
-        //{
-        //    rightKeyB = true;
-        //}
-        //else
-        //{
-        //    rightKeyB = false;
-        //}
+    [Header("-----生命-----")]
+    public Image Heart;
 
-        //if (Input.GetKey(fastFly))
-        //{
-        //    fastFlyB = true;
-        //}
-        //else
-        //{
-        //    fastFlyB = false;
-        //}
-    }
+    [Header("-----重力感应移动速度-----")]
+    public float speed = 10.0F;//方块移动速度
+
+    private float jumpTime = 0;
 
     // Start is called before the first frame update
     private void Start()
@@ -73,18 +44,98 @@ public class BirdBase : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        GetKey();
-
+        Keymap();
         BirdJump();
-
         RighAndLeftMove();
         Zvelocity();
         FastFly();
+#if UNITY_ANDROID//条件编译 手机使用重力感应
+        GravityInteraction();
+#endif
+    }
+
+    private void Keymap()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            jumpKeyBool = true;
+            Debug.LogError("按下了按键");
+            //if (Time.time - jumpTime <= 0.5f)  //跳跃间隔，增加云朵，不设置跳跃间隔
+            //{
+            //    Debug.LogError(Time.time - jumpTime);
+            //    Debug.LogError("开始跳跃");
+            //    jumpKeyB = true;
+            //    jumpTime = 0;
+            //}
+            //else
+            //{
+            //       jumpTime = Time.time;
+            //    jumpKeyB = false;
+            //}
+        }
+        else
+        {
+            jumpKeyBool = false;
+        }
+
+        if (Input.GetKey(jumpKey))
+        {
+            jumpKeyBool = true;
+            //if (Time.time - jumpTime <= 0.5f)  //跳跃间隔，增加云朵，不设置跳跃间隔
+            //{
+            //    Debug.LogError(Time.time - jumpTime);
+            //    Debug.LogError("开始跳跃");
+            //    jumpKeyBool = true;
+            //    jumpTime = 0;
+            //}
+            //else
+            //{
+            //    jumpTime = Time.time;
+            //    jumpKeyBool = false;
+            //}
+
+        }
+        else
+        {
+            jumpKeyBool = false;
+        }
+
+
+        if (Input.GetKey(rightKey))
+        {
+            rightKeyBool = true;
+
+        }
+        else
+        {
+            rightKeyBool = false;
+        }
+        if (Input.GetKey(leftKey))
+        {
+            leftKeyBool = true;
+
+        }
+        else
+        {
+            leftKeyBool = false;
+        }
+        if (Input.GetKey(fastFly))
+        {
+            fastFlyBool = true;
+
+        }
+        else
+        {
+            fastFlyBool = false;
+        }
+
+
     }
 
     public void BirdJump()
     {
-        if (jumpKeyB == true)
+        
+        if (jumpKeyBool == true)
         {
             rigBird.AddForce(new Vector3(0, jumpForce, 0));
         }
@@ -92,7 +143,7 @@ public class BirdBase : MonoBehaviour
 
     public void Zvelocity()
     {
-        if (fastFlyB == false)
+        if (fastFlyBool == false)
         {
             rigBird.velocity = new Vector3(rigBird.velocity.x, rigBird.velocity.y, 0);
         }
@@ -100,7 +151,7 @@ public class BirdBase : MonoBehaviour
 
     public void RighAndLeftMove()
     {
-        if (leftKeyB == true)
+        if (leftKeyBool == true)
         {
             rigBird.AddForce(new Vector3(-moveForce, 0, 0));
             Debug.Log("left");
@@ -109,7 +160,7 @@ public class BirdBase : MonoBehaviour
         {
             rigBird.velocity = new Vector3(0, rigBird.velocity.y, rigBird.velocity.z);
         }
-        if (rightKeyB == true)
+        if (rightKeyBool == true)
         {
             rigBird.AddForce(new Vector3(moveForce, 0, 0));
             Debug.Log("right");
@@ -122,15 +173,43 @@ public class BirdBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == lost)
+        if (other.transform.tag == "Finish")
         {
+            Debug.Log("游戏结束");
             GameMager.GameOver = true;
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag != "Ceiling")
+        {
+            Debug.Log("有碰撞");
+            Heart.fillAmount -= 0.33f;
+            if (Heart.fillAmount <= 0.2f)
+            {
+                GameMager.GameOver = true;
+            }
+        }
+        
+
+    }
+
+    /// <summary>
+    /// 重力感应
+    /// </summary>
+    private void GravityInteraction()
+    {
+        Vector3 dir = Vector3.zero;//方块移动向量
+
+        dir.x = Input.acceleration.x;
+
+        transform.Translate(dir * speed * Time.deltaTime);
+    }
+
     public void FastFly()
     {
-        if (fastFlyB == true)
+        if (fastFlyBool == true)
         {
             Animator.SetBool("fastfly", true);
             rigBird.AddForce(0, 0, fastForce);
