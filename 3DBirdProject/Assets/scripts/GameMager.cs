@@ -29,20 +29,25 @@ public class GameMager : MonoBehaviour
 
     public int coinRotationSpeed;
 
+    [Header("云朵")]
+    public List<GameObject> clouds;
+    public List<Transform> cloudPosition;
+    public float creTimeCloud;
+    [Header("环境")]
+    public List<GameObject> environment;
     // Start is called before the first frame update
     private void Start()
     {
-        timeTemp = creatTime;
         creatNumber = creatGameObject.Count;
         positonNumber = ranPositon.Count;
         text = GameObject.Find("score").GetComponent<Text>();
+        InvokeRepeating(nameof(RepeatCloud), 0.5f, creTimeCloud);
+        InvokeRepeating(nameof(RepeatItem), 0.5f, creatTime);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        RangeCreat();
-        creatTime -= Time.deltaTime;
         if (gameOver == true)
         {
             SceneManager.LoadScene(2);
@@ -56,24 +61,33 @@ public class GameMager : MonoBehaviour
         GamelevelTime += Time.fixedDeltaTime;
     }
 
-    public void Creat(GameObject gameObject, Transform position)
+
+    private void RepeatItem()
     {
-        Instantiate((gameObject), position);
+        RangeCreat(creatGameObject, ranPositon);//对地面障碍物随机创造
     }
 
-    public void RangeCreat()
+    private void RepeatCloud()
     {
-        if (creatTime <= 0)
-        {
-            int ranPTemp = Random.Range(0, positonNumber);//达不到最大值
-            int ranCTemp = Random.Range(0, creatNumber);
+        RangeCreat(clouds, cloudPosition);//对云朵随机创造
+
+    }
+    /// <summary>
+    /// 随机进行创造
+    /// </summary>
+    /// <param name="item">需要创造的物体列表</param>
+    /// <param name="itemPosition">创造的位置列表</param>
+    public void RangeCreat(List<GameObject> item,List<Transform> itemPosition)
+    {
+        
+            int ranPTemp = Random.Range(0, itemPosition.Count);//达不到最大值
+            int ranCTemp = Random.Range(0, item.Count);
 
             Debug.Log(ranPTemp);
 
-            Creat(creatGameObject[ranCTemp], ranPositon[ranPTemp]);
+            Instantiate(item[ranCTemp], itemPosition[ranPTemp]);
 
-            creatTime = timeTemp;
-        }
+        
     }
 
     public void GameLevel()

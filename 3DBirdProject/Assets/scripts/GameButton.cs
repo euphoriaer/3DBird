@@ -13,41 +13,41 @@ public class GameButton : MonoBehaviour
 
     public void leftdown()
     {
-        BirdBase.leftKeyB = true;
+        BirdBase.leftKeyBool = true;
     }
 
     public void leftup()
     {
-        BirdBase.leftKeyB = false;
+        BirdBase.leftKeyBool = false;
     }
 
     public void rightdown()
     {
-        BirdBase.rightKeyB = true;
+        BirdBase.rightKeyBool = true;
     }
 
     public void rightup()
     {
-        BirdBase.rightKeyB = false;
+        BirdBase.rightKeyBool = false;
     }
 
     public void speedown()
     {
-        BirdBase.fastFlyB = true;
+        BirdBase.fastFlyBool = true;
     }
 
     public void speedup()
     {
-        BirdBase.fastFlyB = false;
+        BirdBase.fastFlyBool = false;
     }
 
     public void jumpdown()
     {
-        BirdBase.jumpKeyB = true;
+        BirdBase.jumpKeyBool = true;
     }
 
     public void jumpup()
     {
-        BirdBase.jumpKeyB = false;
+        BirdBase.jumpKeyBool = false;
     }
 }
